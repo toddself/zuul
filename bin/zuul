@@ -20,6 +20,7 @@ program
 .option('--local [port]', 'port for manual testing in a local browser')
 .option('--tunnel', 'establish a tunnel for outside acceess. only used when --local is specified')
 .option('--phantom', 'run tests in phantomjs. PhantomJS must be installed separately.')
+.option('--no-color', 'turn off color in output')
 .parse(process.argv);
 
 var config = {
@@ -30,6 +31,26 @@ var config = {
     phantom: program.phantom,
     prj_dir: process.cwd()
 };
+
+if(!program.color){
+    colors.setTheme({
+        bold: 'stripColors',
+        italic: 'stripColors',
+        underline: 'stripColors',
+        inverse: 'stripColors',
+        yellow: 'stripColors',
+        cyan: 'stripColors',
+        white: 'stripColors',
+        magenta: 'stripColors',
+        green: 'stripColors',
+        red: 'stripColors',
+        grey: 'stripColors',
+        blue: 'stripColors',
+        rainbow: 'stripColors',
+        zebra: 'stripColors',
+        random: 'stripColors'
+    });
+}
 
 if (config.files.length === 0) {
     console.error('at least one `js` test file must be specified');
